@@ -1,4 +1,4 @@
-## 
+##
 
 Mono Repo for ARC Training
 
