@@ -11,7 +11,7 @@ resource "aws_instance" "ec2_instance" {
   associate_public_ip_address = false
   vpc_security_group_ids      = [aws_security_group.instance_security_group.id]
   tenancy                     = "default"
-  subnet_id                   = var.subnet_id
+  subnet_id                   = module.network.subnet_id[0]
   tags = {
 
     Name = var.name
