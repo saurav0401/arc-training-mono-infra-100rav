@@ -1,8 +1,3 @@
-output "aws_region" {
-  description = "The region in AWS where resources are deployed"
-  value       = var.aws_region
-}
-
 output "name" {
   description = "Name of the EC2 instance"
   value       = var.name
