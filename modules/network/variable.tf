@@ -58,6 +58,10 @@ variable "public_route_table_name" {
   default = "public-route-table"
 }
 
+variable "private_route_table_name" {
+  default = "private-route-table"
+}
+
 variable "nat_gateway_name" {
   default = "my-nat-gateway"
 }
