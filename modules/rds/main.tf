@@ -1,3 +1,6 @@
+module network {
+  source = "../network"
+}
 resource "random_password" "password" {
   length           = 16 // Set your desired password length
   special          = true
