@@ -107,24 +107,15 @@ resource "aws_eip" "my_eip" {
   vpc = true
 }
 
-# Route Table Association for Private Subnets
-resource "aws_route_table_association" "private_subnet_1_association" {
-  subnet_id      = aws_subnet.private_subnet_1.id
-  route_table_id = aws_route_table.private_route_table.id
-}
 
-resource "aws_route_table_association" "private_subnet_2_association" {
-  subnet_id      = aws_subnet.private_subnet_2.id
-  route_table_id = aws_route_table.private_route_table.id
+# Route table associations for both Public & Private Subnets
+resource "aws_route_table_association" "public" {
+  count          = length(var.public_subnets_cidr)
+  subnet_id      = element(aws_subnet.public_subnet.*.id, count.index)
+  route_table_id = aws_route_table.public.id
 }
-
-# Route Table Association for Public Subnets
-resource "aws_route_table_association" "public_subnet_1_association" {
-  subnet_id      = aws_subnet.public_subnet_1.id
-  route_table_id = aws_route_table.public_route_table.id
-}
-
-resource "aws_route_table_association" "public_subnet_2_association" {
-  subnet_id      = aws_subnet.public_subnet_2.id
-  route_table_id = aws_route_table.public_route_table.id
+resource "aws_route_table_association" "private" {
+  count          = length(var.private_subnets_cidr)
+  subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
+  route_table_id = aws_route_table.private.id
 }
