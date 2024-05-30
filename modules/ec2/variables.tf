@@ -36,13 +36,63 @@ variable "subnet_id" {
   default = "subnet-05abbb312297ec112"
 }
 
-variable "security_group_id" {
-  description = "The security group to be attached to EC2"
-  type = string
-  default = "sg-0c96c2f5f57c57149"
-}
+#variable "security_group_id" {
+#  description = "The security group to be attached to EC2"
+#  type = string
+#  default = "sg-0c96c2f5f57c57149"
+#}
 
 variable "key_pair" {
   type    = string
   default = "saurav_arc-ec2"
+}
+variable "security_group_name" {
+  description = "Name of the security group"
+  type        = string
+  default     = "instance_security_group"
+}
+variable "security_group_description" {
+  description = "Description of the security group"
+  type        = string
+  default     = "Security group for the EC2 instance"
+}
+variable "ingress_rules" {
+  description = "A map of ingress rules"
+  type = map(object({
+    description = string
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  default = {
+    ssh = {
+      description = "SSH Port allowed for all"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+    # Add more ingress rules as needed
+  }
+}
+variable "egress_rules" {
+  description = "A map of egress rules"
+  type = map(object({
+    description = string
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+  default = {
+    all_traffic = {
+      description = "All outbound traffic allowed"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+    # Add more egress rules as needed
+  }
 }
