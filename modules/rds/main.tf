@@ -7,7 +7,7 @@ resource "random_password" "password" {
   override_special = "!@#$%^&*()_+"
 }
 resource "aws_ssm_parameter" "password_param" {
-  name  = "himanshu-rds-password" // Set your desired SSM parameter name
+  name  = "saurv-rds-password" // Set your desired SSM parameter name
   type  = "SecureString"
   value = random_password.password.result
 }
