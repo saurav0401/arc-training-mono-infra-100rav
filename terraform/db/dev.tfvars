@@ -1,0 +1,6 @@
+environment  = "poc"
+namespace    = "arc"
+name         = "training"
+region       = "us-west-2"
+project_name = "arc-training-debash"
+db_type      = "aurora"
