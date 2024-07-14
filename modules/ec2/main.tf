@@ -1,3 +1,4 @@
+#IAC
 // data block for AMI
 //
 data "aws_ami" "latest_amazon_linux" {
